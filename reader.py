@@ -25,4 +25,6 @@ def read(file_name="MERS_Korea_genome.fasta", full_name=False):
     return gene_list
 
 if __name__ == "__main__":
-    print(read().keys())
+    fasta = read()
+    for i, name in enumerate(fasta):
+        print(i, name)
