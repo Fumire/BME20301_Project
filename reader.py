@@ -1,10 +1,12 @@
+gene_list = dict()
+
 def cut_it(name):
     if name[0] == ">":
         name = name[1:]
     return name.split()[0]
 
 def read(file_name="MERS_Korea_genome.fasta", full_name=False):
-    gene_list = dict()
+    global gene_list
     pasta_file = open(file_name, "r").readlines()
 
     name = ""
@@ -22,9 +24,7 @@ def read(file_name="MERS_Korea_genome.fasta", full_name=False):
         else:
             gene += tmp
 
-    return gene_list
-
 if __name__ == "__main__":
-    fasta = read()
-    for i, name in enumerate(fasta):
+    read()
+    for i, name in enumerate(gene_list):
         print(i, name)
