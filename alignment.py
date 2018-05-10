@@ -1,7 +1,5 @@
-blosum = dict()
-
 def open_blosum(file_name="./BLOSUM50.txt"):
-    global blosum
+    blosum = dict()
     f = open(file_name, 'r')
     names = list()
 
@@ -15,8 +13,9 @@ def open_blosum(file_name="./BLOSUM50.txt"):
         else:
             for i, score in enumerate(line.split()[1:]):
                 blosum[line.split()[0]][names[i]] = int(score)
+    return blosum
 
-def calcMap_global(d1, d2, go_through=-8):
+def calcMap_global(d1, d2, blosum, go_through=-8):
     d1 = " " + d1
     d2 = " " + d2
     answer = [[[0, ""] for y in range(len(d2))] for x in range(len(d1))]
@@ -43,7 +42,7 @@ def calcMap_global(d1, d2, go_through=-8):
                 answer[i][j][1] += "↑"
     return answer
 
-def calcMap_local(d1, d2, go_through=-8):
+def calcMap_local(d1, d2, blosum, go_through=-8):
     d1 = " " + d1
     d2 = " " + d2
     answer = [[[0, "*"] for y in range(len(d2))] for x in range(len(d1))]
@@ -69,15 +68,16 @@ def calcMap_local(d1, d2, go_through=-8):
     return answer
 
 class Alignment:
-    def __init__(self, d1="", d2=""):
+    def __init__(self, d1="", d2="", blosum_file="./BLOSUM50.txt"):
         self.gene1 = d1
         self.gene2 = d2
+        self.blosum = open_blosum(blosum_file)
         self.solve()
         self.gene1, self.gene2 = "-"+d1, "-"+d2
 
     def solve(self):
-        self.answer_global = calcMap_global(self.gene1, self.gene2)
-        self.answer_local = calcMap_local(self.gene1, self.gene2)
+        self.answer_global = calcMap_global(self.gene1, self.gene2, self.blosum)
+        self.answer_local = calcMap_local(self.gene1, self.gene2, self.blosum)
         self.find_alignment_global()
         self.find_alignment_local()
 
@@ -133,6 +133,7 @@ class Alignment:
                 route.append([x, y-1, "←"+tmp])
             if self.answer_global[x][y][1].find("↑") != -1:
                 route.append([x-1, y, "↑"+tmp])
+
         self.subgene_global = list()
         for route in route_global:
             x, y = len(self.gene1)-1, len(self.gene2)-1
@@ -163,10 +164,12 @@ class Alignment:
                 elif maximum_position[0][2] < self.answer_local[i][j][0]:
                     maximum_position[:] = []
                     maximum_position.append([i, j, self.answer_local[i][j][0]])
+
         route = list()
         route_local = list()
         for x, y, z in maximum_position:
             route.append([x, y, ""])
+
         while len(route):
             x, y, tmp = route[0]
             route[:] = route[1:]
@@ -179,6 +182,7 @@ class Alignment:
                 route.append([x, y-1, "←"+tmp])
             if self.answer_local[x][y][1].find("↑") != -1:
                 route.append([x-1, y, "↑"+tmp])
+
         self.subgene_local = list()
         for route in route_local:
             x, y = len(self.gene1)-1, len(self.gene2)-1
