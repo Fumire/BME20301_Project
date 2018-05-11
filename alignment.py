@@ -15,7 +15,7 @@ def open_blosum(file_name="./BLOSUM50.txt"):
                 blosum[line.split()[0]][names[i]] = int(score)
     return blosum
 
-def calcMap_global(d1, d2, blosum, go_through=-8):
+def solvel_map_global(d1, d2, blosum, go_through=-8):
     d1 = " " + d1
     d2 = " " + d2
     answer = [[[0, ""] for y in range(len(d2))] for x in range(len(d1))]
@@ -42,7 +42,7 @@ def calcMap_global(d1, d2, blosum, go_through=-8):
                 answer[i][j][1] += "↑"
     return answer
 
-def calcMap_local(d1, d2, blosum, go_through=-8):
+def solve_map_local(d1, d2, blosum, go_through=-8):
     d1 = " " + d1
     d2 = " " + d2
     answer = [[[0, "*"] for y in range(len(d2))] for x in range(len(d1))]
@@ -76,8 +76,8 @@ class Alignment:
         self.gene1, self.gene2 = "-"+d1, "-"+d2
 
     def solve(self):
-        self.answer_global = calcMap_global(self.gene1, self.gene2, self.blosum)
-        self.answer_local = calcMap_local(self.gene1, self.gene2, self.blosum)
+        self.answer_global = solvel_map_global(self.gene1, self.gene2, self.blosum)
+        self.answer_local = solve_map_local(self.gene1, self.gene2, self.blosum)
         self.find_alignment_global()
         self.find_alignment_local()
 
