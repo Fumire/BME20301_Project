@@ -6,17 +6,11 @@ This README.md will be written soon.
 
 ## Object
 
-1. Compare **MERS-CoV** and CoV which cause common cold, why MERS-CoV has **higher motality rate?**
-2. Comparison between all MERS-Cov **between continent**.
-3. Which **mutation** does **major action** in MERS-CoV? 
-4. Compare the **mutations** of MERS-CoV **along the time**.
-5. Compare **SARS-CoV** and **MERS-CoV**
-6. Compare the **number of ORF**
-7. **Treatment of CoV**, and correlated **mutation or regulation**
-8. Why did MERS-CoV come from **middle-east**?
-9. How did MERS-CoV **move host** to other animal?
-10. In classification of CoV, where are **SARS-CoV** and **MERS-CoV**?
-11. Comparison among MERS-CoV from camel, and human
+Deep Inspection of **MERS**
+
+1. MERS vs. SARS
+2. Common Cold vs. MERS
+3. Treatment
 
 ## Scripts
 
