@@ -49,37 +49,36 @@ def big_solve_map_global(d1, d2, blosum, go_through=-8):
     write_file("0+0", answer)
     for i, ch_i in enumerate(d1):
         if i==0: continue
-        upper = read_file(str(i-1)+"+0")
-        upper = [upper[0]+go_through, add_something(upper[1], (ch_i, "-"))]  
-        write_file(str(i)+"+0", upper)
+        tmp = read_file(str(i-1)+"+0")
+        tmp = [tmp[0]+go_through, add_something(tmp[1], (ch_i, "-"))]  
+        write_file(str(i)+"+0", tmp)
     for j, ch_j in enumerate(d2):
         if j==0: continue
-        left = read_file("0+"+str(j-1))
-        left = [left[0]+go_through, add_something(left[1], ("-", ch_j))]
-        write_file("0+"+str(j), left)
+        tmp = read_file("0+"+str(j-1))
+        tmp = [tmp[0]+go_through, add_something(tmp[1], ("-", ch_j))]
+        write_file("0+"+str(j), tmp)
     for i, ch_i in enumerate(d1):
         if i==0: continue
         for j, ch_j in enumerate(d2):
             if j==0: continue
-            diagonal = read_file(str(i-1)+"+"+str(j-1))
-            upper = read_file(str(i-1)+"+"+str(j))
-            left = read_file(str(i)+"+"+str(j-1))
-
-            answer = [diagonal[0]+blosum[ch_i][ch_j], add_something(diagonal[1], (ch_i, ch_j))]
+            tmp = read_file(str(i-1)+"+"+str(j-1))
+            answer = [tmp[0]+blosum[ch_i][ch_j], add_something(tmp[1], (ch_i, ch_j))]
             
-            if answer[0] < left[0] + go_through:
-                answer = [left[0]+go_through, add_something(left[1], ("-", ch_j))]
-            elif answer[0] == left[0] + go_through:
-                answer[1].extend(add_something(left[1], ("-", ch_j)))
+            tmp = read_file(str(i)+"+"+str(j-1))
+            if answer[0] < tmp[0] + go_through:
+                answer = [tmp[0]+go_through, add_something(tmp[1], ("-", ch_j))]
+            elif answer[0] == tmp[0] + go_through:
+                answer[1].extend(add_something(tmp[1], ("-", ch_j)))
 
-            if answer[0] < upper[0] + go_through:
-                answer = [upper[0]+go_through, add_something(upper[1], (ch_i, "-"))]
-            elif answer[0] < upper[0] + go_through:
-                answer[1].extend(add_something(upper[1], (ch_i, "-")))
+            tmp = read_file(str(i-1)+"+"+str(j))
+            if answer[0] < tmp[0] + go_through:
+                answer = [tmp[0]+go_through, add_something(tmp[1], (ch_i, "-"))]
+            elif answer[0] < tmp[0] + go_through:
+                answer[1].extend(add_something(tmp[1], (ch_i, "-")))
 
             write_file(str(i)+"+"+str(j), answer)
-        os.system("rm -f num" + str(i-1) + "*")
-        os.system("rm -f list" + str(i-1) + "*")
+        os.system("rm -f num" + str(i-1) + "+*")
+        os.system("rm -f list" + str(i-1) + "+*")
     os.system("rm -f *.data")
     return answer
 
@@ -93,33 +92,32 @@ def big_solve_map_local(d1, d2, blosum, go_through=-8):
     write_file("0+0", answer)
     for i, ch_i in enumerate(d1):
         if i==0: continue
-        upper = read_file(str(i-1)+"+0")
-        upper = [upper[0]+go_through, add_something(upper[1], (ch_i, "-"))]
-        write_file(str(i)+"+0", upper)
+        tmp = read_file(str(i-1)+"+0")
+        tmp = [tmp[0]+go_through, add_something(tmp[1], (ch_i, "-"))]
+        write_file(str(i)+"+0", tmp)
     for j, ch_j in enumerate(d2):
         if j==0: continue
-        left = read_file("0+"+str(j-1))
-        left = [left[0]+go_through, add_something(left[1], ("-", ch_j))]
-        write_file("0+"+str(j), left)
+        tmp = read_file("0+"+str(j-1))
+        tmp = [tmp[0]+go_through, add_something(tmp[1], ("-", ch_j))]
+        write_file("0+"+str(j), tmp)
     for i, ch_i in enumerate(d1):
         if i==0: continue
         for j, ch_j in enumerate(d2):
             if j==0: continue
-            diagonal = read_file(str(i-1)+"+"+str(j-1))
-            upper = read_file(str(i-1)+"+"+str(j))
-            left = read_file(str(i)+"+"+str(j-1))
+            tmp = read_file(str(i-1)+"+"+str(j-1))
+            answer = [tmp[0]+blosum[ch_i][ch_j], add_something(tmp[1], (ch_i, ch_j))]
             
-            answer = [diagonal[0]+blosum[ch_i][ch_j], add_something(diagonal[1], (ch_i, ch_j))]
+            tmp = read_file(str(i)+"+"+str(j-1))
+            if answer[0] < tmp[0] + go_through:
+                answer = [tmp[0]+go_through, add_something(tmp[1], ("-", ch_j))]
+            elif answer[0] == tmp[0] + go_through:
+                answer[1].extend(add_something(tmp[1], ("-", ch_j)))
             
-            if answer[0] < left[0] + go_through:
-                answer = [left[0]+go_through, add_something(left[1], ("-", ch_j))]
-            elif answer[0] == left[0] + go_through:
-                answer[1].extend(add_something(left[1], ("-", ch_j)))
-            
-            if answer[0] < upper[0] + go_through:
-                answer = [upper[0]+go_through, add_something(upper[1], (ch_i, "-"))]
-            elif answer[0] < upper[0] + go_through:
-                answer[1].extend(add_something(upper[1], (ch_i, "-")))
+            tmp = read_file(str(i-1)+"+"+str(j))
+            if answer[0] < tmp[0] + go_through:
+                answer = [tmp[0]+go_through, add_something(tmp[1], (ch_i, "-"))]
+            elif answer[0] < tmp[0] + go_through:
+                answer[1].extend(add_something(tmp[1], (ch_i, "-")))
             
             if answer[0] < 0:
                 answer = [0, [("", "")]]
@@ -130,8 +128,8 @@ def big_solve_map_local(d1, d2, blosum, go_through=-8):
                 maximum[1].extend(answer[1])
 
             write_file(str(i)+"+"+str(j), answer)
-        os.system("rm -f num" + str(i-1) + "*")
-        os.system("rm -f list" + str(i-1) + "*")
+        os.system("rm -f num" + str(i-1) + "+*")
+        os.system("rm -f list" + str(i-1) + "+*")
     os.system("rm -f *.data")
     return answer
 
