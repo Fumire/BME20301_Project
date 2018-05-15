@@ -16,6 +16,7 @@ This README.md will be written soon.
 8. Why did MERS-CoV come from **middle-east**?
 9. How did MERS-CoV **move host** to other animal?
 10. In classification of CoV, where are **SARS-CoV** and **MERS-CoV**?
+11. Comparison among MERS-CoV from camel, and human
 
 ## Scripts
 
