@@ -9,8 +9,8 @@ This README.md will be written soon.
 Deep Inspection of **MERS** in the **clinical point** of view
 
 1. Comparison MERS with common cold viruses i.e. rhinovirus
-2. Comparison MERS and SARS using sequence analysis
-3. Lookup treatment method based on herein results
+2. ~~Comparison MERS and SARS using sequence analysis~~
+3. ~~Lookup treatment method based on herein results~~
 
 ##  Material & Method
 
