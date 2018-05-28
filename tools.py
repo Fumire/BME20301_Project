@@ -45,6 +45,26 @@ def difference(gene1, gene2):
             ans += 1
     return ans
 
+def similarity(gene1, gene2):
+    ans = 0
+    assert len(gene1) == len(gene2)
+    for i in range(len(gene1)):
+        if gene1[i] == gene2[i]:
+            ans += 1
+    return ans
+
+def findSimilar(gene1, gene2):
+    if len(gene1) > len(gene2):
+        return findSimilar(gene2, gene1)
+
+    ans = -1
+    for i in range(len(gene2)-len(gene1)+1):
+        tmp = similarity(gene1, gene2[i:i+len(gene1)])
+        if tmp > ans:
+            ans = tmp
+    return ans/len(gene1)
+
 if __name__ == "__main__":
-    ans = translation("AAAUGCAUUAAGAUGUCUUGGUGAC")
-    print(ans)
+    gene1 = "ACT"
+    gene2 = "AAAA"
+    print(findSimilar(gene1, gene2))
