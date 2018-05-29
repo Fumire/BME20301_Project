@@ -1,5 +1,5 @@
 def transcription(dna):
-    change = {"A":"U", "C":"G", "G":"C", "T":"A"}
+    change = {"A":"U", "C":"G", "G":"C", "T":"A", "M":"U", "R":"U", "W":"U", "S":"G", "Y":"G", "K":"C", "V":"U", "H":"U", "D":"U", "B":"G", "X":"U", "N":"U"}
     ans = ""
     for ch in dna:
         ans += change[ch]
