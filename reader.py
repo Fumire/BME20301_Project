@@ -19,6 +19,7 @@ def read(file_name="MERS_Korea_genome.fasta", full_name=False):
             gene = ""
         else:
             gene += tmp
+    gene_list[name] = gene
     return gene_list
 
 if __name__ == "__main__":
