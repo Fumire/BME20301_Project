@@ -25,17 +25,9 @@ def translation(gene):
         tmp, gene = gene[:3], gene[3:]
         if tmp[:2] in codon_table:
             poly_amino += codon_table[tmp[:2]]
-        elif codon_table[tmp] == "*":
-            break
         else:
             poly_amino += codon_table[tmp]
-
-    if poly_amino == "":
-        return list()
-    else:
-        ans = [poly_amino]
-        ans.extend(translation(gene))
-        return ans
+    return poly_amino
 
 def difference(gene1, gene2):
     ans = 0
